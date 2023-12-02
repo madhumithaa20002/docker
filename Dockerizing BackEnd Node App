@@ -1,0 +1,22 @@
+Dockerizing Node App.
+
+ 1. Create a Dockerfile
+FROM node
+WORKDIR /app
+COPY package.json .
+RUN npm install
+COPY . .
+EXPOSE 80
+CMD ["node","app.js"]
+
+2. Build the create docker image
+docker build -t node-image .
+
+3. Create a container
+docker run --name node-container --rm node-image
+We need to change the localhost to mongodb://host.docker.internal:27017/ in the connection to database or else the node dockeried application will communicate to locally stored mongodb database..so to have container to container interaction it is essential to change into hosst.docker.internal in the code.
+
+4. To check the connectivity using docker logs node-container, a message will be displayed as connectd to db.
+
+5. To connect with the Front end application we need to add port as expressed in DockerFile as 80
+docker run --name node-container --rm -d -p 80:80 node-image
