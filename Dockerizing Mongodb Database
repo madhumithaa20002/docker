@@ -1,0 +1,10 @@
+Dockerizing Mongodb Database:
+
+1. Create a container named mongodb-container and the database is locally running on port 27017 and built by using the official image mongo.
+docker run --name mongodb-container -p 27017:27017  --rm -d mongo
+
+2. To clear all the containers not in use
+docker container prune 
+
+3.Check the logs to see whether mongo container is communicating locally to mongodb database.
+docker ps mongdb-container
